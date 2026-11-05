@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | SaúdeTech Dashboards</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body class="login-body">
+
+    <main class="login-container">
+        <section class="login-card">
+            <div class="logo-area">
+                <h1>SaúdeTech <span>Dashboards</span></h1>
+                <p>Vigilância Sanitária de Londrina</p>
+            </div>
+
+            <div class="login-tabs">
+                <button class="tab-button active" id="tabLogin"
+                    onclick="alternarAcesso('login')">Entrar</button>
+                <button class="tab-button" id="tabCadastro"
+                    onclick="alternarAcesso('cadastro')">Solicitar acesso</button>
+            </div>
+
+            <form id="formLogin">
+                <h2>Acesse sua conta</h2>
+                <p class="form-description">Entre com suas credenciais cadastradas.</p>
+
+                <label for="emailLogin">E-mail</label>
+                <input type="email" id="emailLogin" placeholder="seu@email.com" required>
+
+                <label for="senhaLogin">Senha</label>
+                <input type="password" id="senhaLogin" placeholder="Digite sua senha" required>
+
+                <button type="submit" class="primary-button full-button">Entrar</button>
+                <p id="mensagemLogin" class="message"></p>
+            </form>
+
+            <form id="formCadastro" class="hidden">
+                <h2>Solicitar acesso</h2>
+                <p class="form-description">
+                    Preencha seus dados. A administração deverá aprovar sua solicitação.
+                </p>
+
+                <label for="nomeCadastro">Nome completo</label>
+                <input type="text" id="nomeCadastro" placeholder="Seu nome" required>
+
+                <label for="emailCadastro">E-mail institucional</label>
+                <input type="email" id="emailCadastro" placeholder="seu@email.com" required>
+
+                <label for="senhaCadastro">Senha</label>
+                <input type="password" id="senhaCadastro" minlength="6"
+                    placeholder="Mínimo de 6 caracteres" required>
+
+                <button type="submit" class="primary-button full-button">
+                    Enviar solicitação
+                </button>
+                <p id="mensagemCadastro" class="message"></p>
+            </form>
+
+            <div class="demo-access">
+                <strong>Acesso para demonstração</strong>
+                <span>Administração: admin@saudetech.com</span>
+                <span>Fiscal: fiscal@saudetech.com</span>
+                <span>Senha para ambos: 123456</span>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

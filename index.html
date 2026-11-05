@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaúdeTech Dashboards</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+<header class="topbar">
+    <div class="brand">
+        <div>
+            <h1>SaúdeTech Dashboards</h1>
+            <span>Vigilância Sanitária de Londrina</span>
+        </div>
+    </div>
+
+    <nav class="navigation">
+        <button onclick="mostrarTela('dashboard')">Dashboard</button>
+        <button onclick="mostrarTela('indicador')">Indicador I06</button>
+        <button onclick="mostrarTela('formularios')">Formulários</button>
+        <button onclick="mostrarTela('estabelecimentos')">Estabelecimentos</button>
+        <button class="admin-only" onclick="mostrarTela('administracao')">
+            Administração
+        </button>
+    </nav>
+
+    <div class="user-area">
+        <div>
+            <strong id="nomeUsuario">Usuário</strong>
+            <span id="perfilUsuario">Perfil</span>
+        </div>
+        <button class="logout-button" onclick="sair()">Sair</button>
+    </div>
+</header>
+
+<main class="main-content">
+
+    <section id="dashboard" class="tela">
+        <div class="page-heading">
+            <div>
+                <h2>Dashboard</h2>
+                <p>Visão geral dos indicadores da Vigilância Sanitária.</p>
+            </div>
+        </div>
+
+        <div class="filter-row">
+            <div>
+                <label for="periodo">Período</label>
+                <select id="periodo">
+                    <option>Últimos 30 dias</option>
+                    <option>Últimos 90 dias</option>
+                    <option>Este ano</option>
+                </select>
+            </div>
+            <div>
+                <label for="bairro">Bairro</label>
+                <select id="bairro">
+                    <option>Todos os bairros</option>
+                    <option>Centro</option>
+                    <option>Gleba Palhano</option>
+                    <option>Zona Norte</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <article class="stat-card">
+                <span>Estabelecimentos cadastrados</span>
+                <strong id="totalEstabelecimentos">10</strong>
+            </article>
+            <article class="stat-card">
+                <span>Fiscalizações realizadas</span>
+                <strong id="totalFiscalizacoes">24</strong>
+            </article>
+            <article class="stat-card">
+                <span>Formulários pendentes</span>
+                <strong id="totalPendentes">5</strong>
+            </article>
+        </div>
+
+        <div class="content-card">
+            <h3>Top 10 estabelecimentos com mais não conformidades</h3>
+            <div class="chart-placeholder">
+                <div class="bar-row"><span>Estabelecimento 01</span><div class="bar"><i style="width:90%"></i></div><b>18</b></div>
+                <div class="bar-row"><span>Estabelecimento 02</span><div class="bar"><i style="width:75%"></i></div><b>15</b></div>
+                <div class="bar-row"><span>Estabelecimento 03</span><div class="bar"><i style="width:60%"></i></div><b>12</b></div>
+                <div class="bar-row"><span>Estabelecimento 04</span><div class="bar"><i style="width:50%"></i></div><b>10</b></div>
+                <div class="bar-row"><span>Estabelecimento 05</span><div class="bar"><i style="width:40%"></i></div><b>8</b></div>
+            </div>
+        </div>
+
+        <div class="two-columns">
+            <div class="content-card">
+                <h3>Outro indicador do painel</h3>
+                <p class="muted">Área reservada para visualização de dados.</p>
+            </div>
+            <div class="content-card">
+                <h3>Outro indicador do painel</h3>
+                <p class="muted">Área reservada para visualização de dados.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="indicador" class="tela hidden">
+        <div class="page-heading">
+            <div>
+                <h2>Indicador I06</h2>
+                <p>Estabelecimentos com maior número de não conformidades.</p>
+            </div>
+            <button class="secondary-button" onclick="mostrarTela('dashboard')">
+                Voltar ao dashboard
+            </button>
+        </div>
+
+        <div class="content-card">
+            <h3>Ranking de não conformidades</h3>
+            <div class="chart-placeholder">
+                <div class="bar-row"><span>Estabelecimento 01</span><div class="bar"><i style="width:90%"></i></div><b>18</b></div>
+                <div class="bar-row"><span>Estabelecimento 02</span><div class="bar"><i style="width:75%"></i></div><b>15</b></div>
+                <div class="bar-row"><span>Estabelecimento 03</span><div class="bar"><i style="width:60%"></i></div><b>12</b></div>
+                <div class="bar-row"><span>Estabelecimento 04</span><div class="bar"><i style="width:50%"></i></div><b>10</b></div>
+                <div class="bar-row"><span>Estabelecimento 05</span><div class="bar"><i style="width:40%"></i></div><b>8</b></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="formularios" class="tela hidden">
+        <div class="page-heading">
+            <div>
+                <h2>Formulários</h2>
+                <p>Consulte e preencha os formulários de fiscalização.</p>
+            </div>
+            <button class="primary-button" onclick="mostrarTela('novoFormulario')">
+                + Nova fiscalização
+            </button>
+        </div>
+
+        <div class="content-card">
+            <h3>Formulários disponíveis</h3>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Formulário</th>
+                            <th>Descrição</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Inspeção sanitária</td>
+                            <td>Registro de inspeção em estabelecimento.</td>
+                            <td><button class="small-button" onclick="mostrarTela('novoFormulario')">Preencher</button></td>
+                        </tr>
+                        <tr>
+                            <td>Verificação de condições</td>
+                            <td>Verificação de condições sanitárias.</td>
+                            <td><button class="small-button" onclick="mostrarTela('novoFormulario')">Preencher</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section id="novoFormulario" class="tela hidden">
+        <div class="page-heading">
+            <div>
+                <h2>Nova fiscalização</h2>
+                <p>Preencha as informações da visita ao estabelecimento.</p>
+            </div>
+            <button class="secondary-button" onclick="mostrarTela('formularios')">
+                Voltar
+            </button>
+        </div>
+
+        <form id="formFiscalizacao" class="content-card">
+            <div class="form-grid">
+                <div class="field">
+                    <label for="estabelecimentoFiscal">Estabelecimento</label>
+                    <select id="estabelecimentoFiscal" required>
+                        <option value="">Selecione</option>
+                        <option>Mercado Central</option>
+                        <option>Restaurante Sabor</option>
+                        <option>Padaria Primavera</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="dataFiscalizacao">Data da fiscalização</label>
+                    <input type="date" id="dataFiscalizacao" required>
+                </div>
+
+                <div class="field full">
+                    <label for="observacoes">Observações</label>
+                    <textarea id="observacoes" rows="5"
+                        placeholder="Descreva as condições encontradas..."></textarea>
+                </div>
+
+                <div class="field full">
+                    <label>Resultado da fiscalização</label>
+                    <select id="resultadoFiscalizacao" required>
+                        <option value="">Selecione</option>
+                        <option>Conforme</option>
+                        <option>Não conforme</option>
+                        <option>Necessita de nova avaliação</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="attachment-area">
+                <div>
+                    <h3>Registro fotográfico</h3>
+                    <p class="muted">
+                        Adicione imagens para documentar as condições encontradas durante a fiscalização.
+                    </p>
+                </div>
+
+                <button type="button" class="secondary-button"
+                    onclick="abrirModalFotos()">
+                    + Selecionar imagens
+                </button>
+
+                <div id="listaFotos" class="photo-list"></div>
+            </div>
+
+            <button type="submit" class="primary-button">Enviar fiscalização</button>
+        </form>
+    </section>
+
+    <section id="confirmacao" class="tela hidden">
+        <div class="confirmation-card">
+            <div class="success-icon">✓</div>
+            <h2>Fiscalização enviada!</h2>
+            <p>O registro foi enviado com sucesso e está disponível para acompanhamento.</p>
+            <button class="primary-button" onclick="mostrarTela('formularios')">
+                Voltar aos formulários
+            </button>
+        </div>
+    </section>
+
+    <section id="estabelecimentos" class="tela hidden">
+        <div class="page-heading">
+            <div>
+                <h2>Estabelecimentos</h2>
+                <p>Consulte os estabelecimentos cadastrados.</p>
+            </div>
+            <button class="primary-button admin-only"
+                onclick="abrirModalEstabelecimento()">+ Cadastrar estabelecimento</button>
+        </div>
+
+        <div class="content-card">
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Estabelecimento</th>
+                            <th>Categoria</th>
+                            <th>Bairro</th>
+                            <th>Situação</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelaEstabelecimentos">
+                        <tr>
+                            <td>Mercado Central</td>
+                            <td>Comércio de alimentos</td>
+                            <td>Centro</td>
+                            <td><span class="status status-ok">Verificado</span></td>
+                        </tr>
+                        <tr>
+                            <td>Restaurante Sabor</td>
+                            <td>Restaurante</td>
+                            <td>Centro</td>
+                            <td><span class="status status-pending">Pendente</span></td>
+                        </tr>
+                        <tr>
+                            <td>Padaria Primavera</td>
+                            <td>Panificadora</td>
+                            <td>Zona Norte</td>
+                            <td><span class="status status-ok">Verificado</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section id="administracao" class="tela hidden admin-screen">
+        <div class="page-heading">
+            <div>
+                <h2>Administração</h2>
+                <p>Gerencie formulários, solicitações de acesso e estabelecimentos.</p>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h3>Solicitações de acesso</h3>
+            <p class="muted">Aprove ou recuse os cadastros de novos fiscais.</p>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>E-mail</th>
+                            <th>Situação</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelaSolicitacoes">
+                        <tr><td colspan="4">Nenhuma solicitação pendente.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h3>Gerenciamento de formulários</h3>
+            <p class="muted">Acompanhe e atualize o status dos registros enviados.</p>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Estabelecimento</th>
+                            <th>Data</th>
+                            <th>Fiscal</th>
+                            <th>Resultado</th>
+                            <th>Status</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelaAdministracao">
+                        <tr><td colspan="6">Nenhum formulário enviado.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h3>Verificação de estabelecimentos</h3>
+            <p class="muted">A administração pode confirmar os cadastros dos estabelecimentos.</p>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Estabelecimento</th>
+                            <th>Categoria</th>
+                            <th>Bairro</th>
+                            <th>Situação</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelaVerificacao"></tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<div id="modalFotos" class="modal hidden">
+    <div class="modal-content">
+        <button class="close-button" onclick="fecharModalFotos()">×</button>
+        <h2>Anexar fotos</h2>
+        <p class="muted">Selecione uma ou mais imagens do dispositivo.</p>
+        <input type="file" id="inputFotos" accept="image/*" multiple>
+        <div class="modal-actions">
+            <button class="secondary-button" onclick="fecharModalFotos()">Cancelar</button>
+            <button class="primary-button" onclick="adicionarFotos()">Adicionar</button>
+        </div>
+    </div>
+</div>
+
+<div id="modalEstabelecimento" class="modal hidden">
+    <div class="modal-content">
+        <button class="close-button" onclick="fecharModalEstabelecimento()">×</button>
+        <h2>Novo estabelecimento</h2>
+
+        <form id="formEstabelecimento">
+            <label for="nomeEstabelecimento">Nome</label>
+            <input id="nomeEstabelecimento" required>
+
+            <label for="categoriaEstabelecimento">Categoria</label>
+            <input id="categoriaEstabelecimento" required>
+
+            <label for="bairroEstabelecimento">Bairro</label>
+            <input id="bairroEstabelecimento" required>
+
+            <div class="modal-actions">
+                <button type="button" class="secondary-button"
+                    onclick="fecharModalEstabelecimento()">Cancelar</button>
+                <button type="submit" class="primary-button">Cadastrar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
